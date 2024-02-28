@@ -2,7 +2,7 @@ const express = require('express');
 const port = 8055;
 
 const app = express();
-const mongoose = require('./config/mongoose');
+// const mongoose = require('./config/mongoose');
 const register = require('./models/ADMIN/register');
 const passport = require('passport');
 const passportJwt = require("./config/passport-jwt-stragy");
@@ -10,11 +10,19 @@ const passportJwt = require("./config/passport-jwt-stragy");
 const session = require('express-session');
 app.use(express.urlencoded());
 
+const mongoose = require('mongoose');
+mongoose.connect(("mongodb+srv://rathodharsh7434:Dimpal74348@cluster0.pucwosc.mongodb.net/task"), {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
+    .then(() => console.log('Database Connected'))
+    .catch((err) => console.log(err));
+
 
 
 app.use(session({
-    name: "aksharJwtSession",
-    secret: "akshar",
+    name: "harshJwtSession",
+    secret: "harsh",
     resave: false,
     saveUninitialized: true,
     cookie: {
